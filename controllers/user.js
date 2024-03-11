@@ -1,3 +1,4 @@
+import { compare } from "bcrypt";
 import { User } from "../models/user.js";
 import { sendToken } from "../utils/features.js";
 
@@ -22,8 +23,20 @@ const newUser = async (req, res) => {
   sendToken(res, user, 201, "User created");
 };
 
-const login = (req, res) => {
-  res.send("Hello world");
+const login = async (req, res, next) => {
+  const { username, password } = req.body;
+
+  const user = await User.findOne({ username }).select("+password");
+
+  if (!user) return next(new Error("Invalid Username"));
+
+  const isMatch = await compare(password, user.password);
+
+  if (!isMatch) return next(new Error("Invalid Password"));
+
+  sendToken(res, user, 200, `Welcome Back, ${user.name}`);
 };
 
-export { login, newUser };
+const getMyProfile = (req, res) => {};
+
+export { login, newUser, getMyProfile };
