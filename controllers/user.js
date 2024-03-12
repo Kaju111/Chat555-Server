@@ -44,7 +44,7 @@ const login = TryCatch(async (req, res, next) => {
 const getMyProfile = (req, res) => {
   res.status(200).json({
     success: true,
-    data: "req.user",
+    data: req.user,
   });
 };
 
