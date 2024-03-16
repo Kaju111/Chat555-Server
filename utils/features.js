@@ -2,16 +2,16 @@ import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 
 const cookieOptions = {
-  maxAge: 15 * 24 * 60 * 60 * 1000,
-  sameSite: "none",
+  expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
   httpOnly: true,
+  sameSite: "none",
   secure: true,
 };
 
 const connectDB = (uri) => {
   mongoose
     .connect(uri, { dbName: "Chat555" })
-    .then((data) => console.log(`Connect to DB : ${data.connection.host}`))
+    .then((data) => console.log(`Connected to DB: ${data.connection.host}`))
     .catch((err) => {
       throw err;
     });
@@ -26,4 +26,4 @@ const sendToken = (res, user, code, message) => {
   });
 };
 
-export { connectDB, sendToken, cookieOptions };
+export { connectDB, sendToken };
