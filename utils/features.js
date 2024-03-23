@@ -25,5 +25,4 @@ const sendToken = (res, user, code, message) => {
     message,
   });
 };
-
 export { connectDB, sendToken };
