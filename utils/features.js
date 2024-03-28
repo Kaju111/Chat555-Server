@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 
 const cookieOptions = {
-  expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
-  httpOnly: true,
+  maxAge: 15 * 24 * 60 * 60 * 1000,
   sameSite: "none",
+  httpOnly: true,
   secure: true,
 };
 
@@ -22,6 +22,7 @@ const sendToken = (res, user, code, message) => {
 
   return res.status(code).cookie("chattu-token", token, cookieOptions).json({
     success: true,
+    user,
     message,
   });
 };
