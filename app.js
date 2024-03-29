@@ -24,11 +24,11 @@ app.use(cookieParser());
 app.use("/user", userRoute);
 app.use("/chat", chatRoute);
 
+app.use(errorMiddlewares);
+
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
-
-app.use(errorMiddlewares);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

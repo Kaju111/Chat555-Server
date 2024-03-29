@@ -7,15 +7,9 @@ import { ErrorHandler } from "../utils/utility.js";
 const newUser = TryCatch(async (req, res, next) => {
   const { name, username, password, bio } = req.body;
 
-  const file = req.file;
-
-  if (!file) return next(new ErrorHandler("Please Upload Avatar"));
-
-  const result = await uploadFilesToCloudinary([file]);
-
   const avatar = {
-    public_id: result[0].public_id,
-    url: result[0].url,
+    public_id: "public_id",
+    url: "url",
   };
 
   const user = await User.create({

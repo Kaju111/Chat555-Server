@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from "mongoose";
+import mongoose, { Schema, model, Types } from "mongoose";
 
 const schema = new Schema(
   {
@@ -7,6 +7,7 @@ const schema = new Schema(
       default: "pending",
       enum: ["pending", "accepted", "rejected"],
     },
+
     sender: {
       type: Types.ObjectId,
       ref: "User",
@@ -14,11 +15,13 @@ const schema = new Schema(
     },
     receiver: {
       type: Types.ObjectId,
-      ref: "Chat",
+      ref: "User",
       required: true,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
 export const Request = mongoose.models.Request || model("Request", schema);

@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
 import { ErrorHandler } from "../utils/utility.js";
+import { TryCatch } from "./error.js";
 
-const isAuthenticated = (req, res, next) => {
+const isAuthenticated = TryCatch((req, res, next) => {
   const token = req.cookies["chattu-token"];
-
   if (!token)
     return next(new ErrorHandler("Please login to access this route", 401));
 
@@ -12,5 +12,6 @@ const isAuthenticated = (req, res, next) => {
   req.user = decodedData._id;
 
   next();
-};
+});
+
 export { isAuthenticated };

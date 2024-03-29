@@ -15,13 +15,10 @@ app.post("/new", singleAvatar, newUser);
 app.post("/login", login);
 
 // After here user must be logged in to access the route
-
 app.use(isAuthenticated);
 
 app.get("/me", getMyProfile);
-
 app.get("/logout", logout);
-
 app.get("/search", searchUser);
 
 export default app;
