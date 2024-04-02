@@ -18,7 +18,7 @@ connectDB(mongoURI);
 const app = express();
 
 // Using Middlewares Here
-// app.use(express.json());
+app.use(express.json());
 // app.use(cookieParser());
 
 app.use("/user", userRoute);
