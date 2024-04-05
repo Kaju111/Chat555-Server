@@ -9,4 +9,15 @@ const connectDB = (uri) => {
     });
 };
 
-export { connectDB };
+const sendToken = (res, user, code, message) => {
+  const token = "ajnasdo";
+
+  return res.status(code).json({
+    success: true,
+    token,
+    message,
+    user,
+  });
+};
+
+export { connectDB, sendToken };
