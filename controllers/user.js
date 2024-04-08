@@ -11,14 +11,14 @@ const newUser = async (req, res) => {
   };
 
   const user = await User.create({
-    name,
-    bio,
-    username,
-    password,
+    name: "Chaman",
+    username: "chamn",
+    password: "chaman",
     avatar,
   });
 
-  sendToken(res, user, 201, "User created");
+  res.status(201).json({ message: "User created successfully" });
+  // sendToken(res, user, 201, "User created");
 };
 
 const login = (req, res) => {
